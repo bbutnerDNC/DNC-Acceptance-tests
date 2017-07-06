@@ -81,7 +81,7 @@ class AcceptanceTester extends \Codeception\Actor
     
     public function DomainsListExpandCategories()
     {   $I = $this;
-        $I->wantTo('check every unchecked category');
+        //$I->wantTo('check every unchecked category');
         $I->seeCurrentUrlEquals('/my/domains/list');
         try{ $I->see('Nameservers' ,'//*[@id="list_table"]');}
             catch (Exception $e){$I->click(DomainsList::$NameServersButton);}
