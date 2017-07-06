@@ -1,0 +1,22 @@
+# Codeception Test Suite Configuration
+#
+# Suite for acceptance tests.
+# Perform tests in browser using the WebDriver or PhpBrowser.
+# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+
+actor: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver:
+            url: http://directnic.com
+            browser: phantomjs
+            clear_cookies: true
+groups:
+    All: [tests/acceptance/ArePagesUp, tests/acceptance/ScanPages, tests/acceptance/ManageDomains, tests/acceptance/TimeToBuy/TimeToBuyWorkAroundCept.php]
+    General: [tests/acceptance/ArePagesUp, tests/acceptance/ScanPages]
+    Functional: [tests/acceptance/ManageDomains, tests/acceptance/TimeToBuy/TimeToBuyWorkAroundCept.php]
+    Buy: [tests/acceptance/TimeToBuy/]
+extenstions:
+    enabled:
+        - Codeception\Extension\Recorder
+        - Codeception\Extension\Logger
