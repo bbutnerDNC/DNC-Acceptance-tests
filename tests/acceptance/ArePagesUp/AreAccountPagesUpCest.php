@@ -1,4 +1,6 @@
 <?php
+
+
 class AreAccountPagesUpCest
 {
     public function _before(AcceptanceTester $I)
@@ -35,38 +37,67 @@ class AreAccountPagesUpCest
     {	//gets things from sitemap
         $I->click('Domains', '//*[@id="controller_sitemap"]/div[2]/div[2]/div/ul/div[2]/ul');
         $I->wait(2);
-        $I->canSeeInCurrentUrl('/my/domains');
-		$I->cantSee('404');
-        $I->canSeeOptionIsSelected('//*[@id="controller_accountservices"]/div[2]/form/div/ul[1]/li/div/select','Domain');
+		try{
+        $I->seeInCurrentUrl('/my/domains');
+		$I->dontSee('404');
+        $I->seeOptionIsSelected('//*[@id="controller_accountservices"]/div[2]/form/div/ul[1]/li/div/select','Domain');
+		}catch (Exception $e){
+		$I->comment('Domains service just failed');
+		$I->canSee('a reason to stop the other tests');
+		}
         //leads to 404?
-        $I->moveback();
+		
+		$I->moveback();
         $I->click('Transfers', '//*[@id="controller_sitemap"]/div[2]/div[2]/div/ul/div[2]/ul');
         $I->wait(2);
-        $I->canSeeInCurrentUrl('/my/transfers');
-		$I->cantSee('404');
-        $I->canSeeOptionIsSelected('//*[@id="controller_accountservices"]/div[2]/form/div/ul[1]/li/div/select','Transfers');
-        //leads to 404?
+		try{
+        $I->seeInCurrentUrl('/my/transfers');
+		$I->dontSee('404');
+        $I->seeOptionIsSelected('//*[@id="controller_accountservices"]/div[2]/form/div/ul[1]/li/div/select','Transfers');
+        }catch (Exception $e){
+		$I->comment('Transfers service just failed');
+		$I->canSee('a reason to stop the other tests');
+		}
+		//leads to 404?
+		
         $I->moveback();
         $I->click('Directnic Hosting', '//*[@id="controller_sitemap"]/div[2]/div[2]/div/ul/div[2]/ul');
         $I->wait(2);
+		try{
         $I->seeInCurrentUrl('/my/services');
-		$I->cantSee('404');
-        $I->canSeeOptionIsSelected('//*[@id="controller_accountservices"]/div[2]/form/div/ul[1]/li/div/select','Hosting');
-        //see in field hosting OK
+		$I->dontSee('404');
+        $I->seeOptionIsSelected('//*[@id="controller_accountservices"]/div[2]/form/div/ul[1]/li/div/select','Hosting');
+        }catch (Exception $e){
+		$I->comment('Hosting service just failed');
+		$I->canSee('a reason to stop the other tests');
+		}
+		//see in field hosting OK
+		
         $I->moveback();
         $I->click('SSL Certificates', '//*[@id="controller_sitemap"]/div[2]/div[2]/div/ul/div[2]/ul');
         $I->wait(2);
-        $I->seeInCurrentUrl('/my/services');
-		$I->cantSee('404');
-        $I->canSeeOptionIsSelected('//*[@id="controller_accountservices"]/div[2]/form/div/ul[1]/li/div/select','SSL Certificates');
-        //currently loads default services page
+        try{
+		$I->seeInCurrentUrl('/my/services');
+		$I->dontSee('404');
+        $I->seeOptionIsSelected('//*[@id="controller_accountservices"]/div[2]/form/div/ul[1]/li/div/select','SSL Certificates');
+        }catch (Exception $e){
+		$I->comment('SSL Certificates service just failed');
+		$I->canSee('a reason to stop the other tests');
+		}
+		//currently loads default services page
+		
         $I->moveback();
         $I->click('Directnic Email', '//*[@id="controller_sitemap"]/div[2]/div[2]/div/ul/div[2]/ul');
         $I->wait(2);
-        $I->seeInCurrentUrl('/my/services');
-		$I->cantSee('404');
-        $I->canSeeOptionIsSelected('//*[@id="controller_accountservices"]/div[2]/form/div/ul[1]/li/div/select','Email');
-        //see in field email OK
+        try{
+		$I->seeInCurrentUrl('/my/services');
+		$I->dontSee('404');
+        $I->seeOptionIsSelected('//*[@id="controller_accountservices"]/div[2]/form/div/ul[1]/li/div/select','Email');
+        }catch (Exception $e){
+		$I->comment('Email service just failed');
+		$I->see('a reason to stop here');
+		}
+		//see in field email OK
         
     }
     
