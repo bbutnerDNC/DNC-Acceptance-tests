@@ -206,7 +206,7 @@ class ManageOwnedDomainsListCest
         $searchTerm = 't';
         //initally the nameservers column is displayed 
         $I->seeCheckboxIsChecked(DomainsList::$NameServersButton.'/input');
-        $I->seeNumberOfElements('//*[@id="list_table"]/div/div[3]/div[2]/span',5);
+        $I->seeNumberOfElements('//*[@id="list_table"]/div/div[3]/div[2]/span',5);// pagination boxes at 5 means there aren't other pages
         $I->comment('-------------------------------------------');
         $I->comment('Change the items per page to wipe columns, and then change it back to 5');
         $I->scrollTo(DomainsList::$ItemsPerPage);
@@ -222,7 +222,7 @@ class ManageOwnedDomainsListCest
         $I->comment('Confirm the bug of columns being wiped after changing Items Per Page, here we care about nameservers');
         $I->canSeeCheckboxIsChecked(DomainsList::$NameServersButton.'/input');
         $I->comment('The next test failing means pagification isnt working right');
-        $I->canSeeNumberOfElements('//*[@id="list_table"]/div/div[3]/div[2]/span',[6,19]); //checks that there are only 5 pagification buttons
+        $I->canSeeNumberOfElements('//*[@id="list_table"]/div/div[3]/div[2]/span',[6,19]); //checks if there are only 5 pagification buttons
         $I->comment('-------------------------------------------');
         
 
