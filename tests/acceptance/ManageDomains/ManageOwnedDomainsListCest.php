@@ -153,7 +153,7 @@ class ManageOwnedDomainsListCest
  */ 
     public function DoesSortingWork(AcceptanceTester $I)
     {
-        $I->wantTo('see how categories change when the sorting method is changed');
+        //$I->wantTo('see how categories change when the sorting method is changed');
         $I->DomainsListExpandCategories($I);
         $I->click(DomainsList::$SearchButton);
         $I->wait(1);
